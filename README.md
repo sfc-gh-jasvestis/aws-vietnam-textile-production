@@ -118,7 +118,7 @@ Industry research and Snowflake customer outcomes:
 - **Vietnam textile & garment exports reached $44B in 2024, making it the world's 3rd largest exporter** — [VITAS](https://www.vietnamtextile.org.vn/)
 - **Average factory utilization in Dong Nai industrial zones is 72% — AI-driven scheduling can push this to 85-90%** — [McKinsey Operations](https://www.mckinsey.com/capabilities/operations/our-insights/manufacturing-analytics-unleashes-productivity-and-profitability)
 - **Vietnam has 7,000+ textile enterprises employing 3 million workers across 60 provinces** — [General Statistics Office Vietnam](https://www.gso.gov.vn/en/data-and-statistics/2024/01/socio-economic-situation-report/)
-- **Esquel Group achieved 15% production efficiency gain using real-time analytics on Snowflake** — [Snowflake Customers](https://www.snowflake.com/en/customers/all-customers/)
+- **Under Armour** (Snowflake customer): consolidated global supply chain data on Snowflake, reducing time-to-insight from weeks to minutes across 35K retail doors -- [snowflake.com/customers/under-armour](https://www.snowflake.com/en/customers/all-customers/case-study/under-armour/)
 
 ## Key Demo Numbers
 
