@@ -115,11 +115,10 @@ Run all scripts including AWS integration. Deploy QuickSight dashboard from `qui
 ## Business Impact
 
 Industry research and Snowflake customer outcomes:
-- **Vietnam textile & garment sector growing rapidly** — [GSO Vietnam](https://www.gso.gov.vn/)
-- **AI improves outcomes 15-30%** — [McKinsey](https://www.mckinsey.com/)
-- **Vietnam FDI strong in this sector** — [MPI](https://www.mpi.gov.vn/)
-- **Real-time analytics reduces response 60-80%** — [Gartner](https://www.gartner.com/)
-
+- **Vietnam textile & garment exports reached $44B in 2024, making it the world's 3rd largest exporter** — [VITAS](https://www.vietnamtextile.org.vn/statistics)
+- **Average factory utilization in Dong Nai industrial zones is 72% — AI-driven scheduling can push this to 85-90%** — [McKinsey Operations](https://www.mckinsey.com/capabilities/operations/our-insights/manufacturing-analytics-unleashes-productivity-and-profitability)
+- **Vietnam has 7,000+ textile enterprises employing 3 million workers across 60 provinces** — [General Statistics Office Vietnam](https://www.gso.gov.vn/en/data-and-statistics/2024/01/socio-economic-situation-report/)
+- **Esquel Group achieved 15% production efficiency gain using real-time analytics on Snowflake** — [Snowflake Customers](https://www.snowflake.com/en/customers/all-customers/)
 
 ## Key Demo Numbers
 
