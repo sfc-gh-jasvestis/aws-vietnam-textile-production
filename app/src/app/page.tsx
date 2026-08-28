@@ -134,10 +134,11 @@ export default function HomePage() {
           'Show changeover time trend by style complexity',
           'What is the optimal line loading for next week?',
         ]}
-        onSubmit={async (question) => {
+        mode="both"
+        onSubmit={async (question, mode) => {
           return {
-            answer: `[Demo Mode] Response to: "${question}" Connect to Snowflake for live data.`,
-            sql: 'SELECT * FROM CURATED.SUMMARY LIMIT 10;',
+            answer: `[Demo Mode] Response to: "${question}" (${mode} mode). Connect to Snowflake for live data.`,
+            sql: mode === 'sql' ? 'SELECT * FROM CURATED.SUMMARY LIMIT 10;' : undefined,
           };
         }}
       />
