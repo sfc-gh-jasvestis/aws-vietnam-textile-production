@@ -21,8 +21,8 @@ Snowflake delivers production optimization intelligence for Vietnamese textile &
 | Database | `VIETNAM_TEXTILE_PRODUCTION` |
 | Service | `VIETNAM_TEXTILE_PRODUCTION_APP` |
 | Compute pool | `SEA_DEMOS_VIETNAM_POOL` |
-| Dimension table | `RAW.DOCUMENTS` (20 rows) |
-| Fact table | `RAW.METRICS` (250,000 rows, 90 days) |
+| Dimension table | `RAW.PRODUCTION_LINES` (20 rows) |
+| Fact table | `RAW.SHIFT_OUTPUTS` (250,000 rows, 90 days) |
 | Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
 | Currency | VND (₫) |
 
@@ -42,10 +42,10 @@ original literal as a fallback, so it still renders if Snowflake is unreachable.
 
 | Card | Value | Backed by |
 |---|---|---|
-| Production Output | `12.4M pcs` | total across Documents |
+| Production Output | `12.4M pcs` | total across Production Lines |
 | Line Efficiency | `84%` | average per event |
 | Quality Pass Rate | `97.2%` | average per event |
-| Workers Active | `8,400` | total across Documents |
+| Workers Active | `8,400` | total across Production Lines |
 | SAM Achievement | `92%` | average per event |
 | Changeover Time | `2.4 hrs` | average per event |
 | Absenteeism | `4.8%` | average per event |
