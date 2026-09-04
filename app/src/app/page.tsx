@@ -54,6 +54,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="vietnam"
+            labels={{ entity: 'Styles', event: 'Shift Outputs', alert: 'Line Stoppages' }}
             regions={data?.regions}
             markers={[{"label": "Ho Chi Minh City", "value": "HQ + export", "color": "blue", "size": "lg"}, {"label": "Binh Duong", "value": "Factory cluster", "color": "green", "size": "lg"}, {"label": "Long An", "value": "Dyeing & finishing", "color": "amber", "size": "md"}, {"label": "Hanoi", "value": "Northern factories", "color": "green", "size": "md"}, {"label": "Da Nang", "value": "Central hub", "color": "green", "size": "sm"}]}
             routes={[{"from": "Binh Duong", "to": "Ho Chi Minh City", "color": "#29B5E8"}]}
@@ -84,8 +85,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: 'Line' },
           { key: 'name', header: 'Style' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Status' },
-          { key: 'value', header: 'Efficiency %' },
+          { key: 'm1', header: 'Efficiency %' },
+          { key: 'm2', header: 'Quality Pass Rate' },
+          { key: 'm3', header: 'Sam Achievement' },
+          { key: 'events', header: 'Shift Outputs' },
+          { key: 'alerts', header: 'Line Stoppages' },
         ]}
         data={data?.entities || []}
         title="Production Line Status"
