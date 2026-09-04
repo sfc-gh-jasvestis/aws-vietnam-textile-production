@@ -54,6 +54,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="vietnam"
+            regions={data?.regions}
             markers={[{"label": "Ho Chi Minh City", "value": "HQ + export", "color": "blue", "size": "lg"}, {"label": "Binh Duong", "value": "Factory cluster", "color": "green", "size": "lg"}, {"label": "Long An", "value": "Dyeing & finishing", "color": "amber", "size": "md"}, {"label": "Hanoi", "value": "Northern factories", "color": "green", "size": "md"}, {"label": "Da Nang", "value": "Central hub", "color": "green", "size": "sm"}]}
             routes={[{"from": "Binh Duong", "to": "Ho Chi Minh City", "color": "#29B5E8"}]}
             title="Geographic Overview"
@@ -70,7 +71,7 @@ export default function HomePage() {
           title="Daily Production Output"
         />
         <Chart
-          data={data?.categories || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
+          data={data?.categoryMetric || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
           type="bar"
           xKey="category"
           yKeys={[{ key: 'count', name: '%' }]}
@@ -114,7 +115,7 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Chart
-          data={data?.breakdown || [{ label: 'Zone North', value: 35 }, { label: 'Zone Central', value: 28 }, { label: 'Zone South', value: 22 }, { label: 'Zone East', value: 15 }]}
+          data={data?.regionAlerts || [{ label: 'Zone North', value: 35 }, { label: 'Zone Central', value: 28 }, { label: 'Zone South', value: 22 }, { label: 'Zone East', value: 15 }]}
           type="pie"
           xKey="label"
           yKeys={[{ key: 'value', name: 'Pieces (K)' }]}
