@@ -1,0 +1,142 @@
+{
+  "title": "Vietnam Garment Line Production",
+  "duration": "6 minutes",
+  "thesis": "Snowflake turns daily line data from a synthetic network of Vietnamese garment cutting, sewing and packing lines into plan-attainment KPIs, 7-day stoppage-risk scores, throughput gap anomalies and grounded AI answers, all on curated dynamic tables.",
+  "tabs": [
+    {
+      "id": "executive-cockpit",
+      "persona": {
+        "name": "Tran Thi Hong",
+        "role": "Head of Production Planning (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Plan attainment, line stoppages, queue hours per piece and pieces released for 28 garment lines across 5 Vietnamese cities.",
+        "Every KPI is a numerator over a denominator in a curated dynamic table, so it can be traced back to line-day rows.",
+        "The shortfall chart shows which stoppage causes cost the most committed pieces; late fabric deliveries lead."
+      ],
+      "show": [
+        "KPI cards",
+        "Daily plan attainment",
+        "Piece shortfall by root cause",
+        "Garment line table"
+      ],
+      "call_out": "One governed set of line production KPIs, traceable to source rows",
+      "transition": {
+        "next_tab": "predictive",
+        "line": "Which lines are likely to stop next?"
+      }
+    },
+    {
+      "id": "predictive",
+      "persona": {
+        "name": "Vo Quoc Bao",
+        "role": "Industrial Engineer, line balancing (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Snowflake ML classification scores each line's probability of a stoppage in the next 7 days.",
+        "The holdout line shows precision and recall on the most recent labelled days, against the base rate; the lift over the base rate is small and recall is low, so treat the score as triage.",
+        "Anomaly detection flags throughput gap outliers per line, and the forecast projects network-wide plan attainment for 14 days."
+      ],
+      "show": [
+        "Holdout metrics",
+        "Risk by line",
+        "Plan attainment forecast",
+        "Throughput gap anomalies"
+      ],
+      "call_out": "Honest, evaluated ML inside the data platform",
+      "transition": {
+        "next_tab": "planning",
+        "line": "How many backup machines sit behind those risks?"
+      }
+    },
+    {
+      "id": "planning",
+      "persona": {
+        "name": "Vo Quoc Bao",
+        "role": "Industrial Engineer, line balancing (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Line availability and backup machine coverage show how much room each line has when a machine goes down.",
+        "PM compliance against plan attainment by line shows where the two move together; it is an association, not proof of cause.",
+        "The action memo drafts three prioritised actions from the KPI, stoppage, cause and risk tables only."
+      ],
+      "show": [
+        "Line availability and backup machine coverage",
+        "PM compliance vs plan attainment",
+        "Action memo"
+      ],
+      "call_out": "Grounded draft actions, with a human in the loop",
+      "transition": {
+        "next_tab": "live",
+        "line": "What happens when a sewing line alarms right now?"
+      }
+    },
+    {
+      "id": "live",
+      "persona": {
+        "name": "Vo Quoc Bao",
+        "role": "Industrial Engineer, line balancing (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Live sewing-line controller messages land in RAW.LIVE_TELEMETRY, from the simulator or from AWS IoT Core through Snowpipe.",
+        "The Snowflake alert logs ALARM readings with an SOP hint and the line's current risk band, then emails the line planner."
+      ],
+      "show": [
+        "Messages loaded and lag",
+        "Latest readings",
+        "Alert log"
+      ],
+      "call_out": "From line alarm to action in one platform",
+      "transition": {
+        "next_tab": "ask-ai",
+        "line": "Now ask the data directly."
+      }
+    },
+    {
+      "id": "ask-ai",
+      "persona": {
+        "name": "Tran Thi Hong",
+        "role": "Head of Production Planning (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "The Cortex Agent uses Cortex Analyst over the semantic view for metrics, and Cortex Search over synthetic line stoppage SOPs.",
+        "Each answer shows the generated SQL and the SOPs it cited."
+      ],
+      "show": [
+        "Ask a sample question",
+        "Generated SQL",
+        "SOP citations"
+      ],
+      "call_out": "Natural-language answers you can audit",
+      "transition": {
+        "next_tab": "architecture",
+        "line": "Here is how it is built."
+      }
+    },
+    {
+      "id": "architecture",
+      "persona": {
+        "name": "Tran Thi Hong",
+        "role": "Head of Production Planning (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Two builds share one core: Snowflake only, or AWS + Snowflake (IoT Core, Bedrock, QuickSight and Amazon Q).",
+        "Everything shown is synthetic demo data, rebuilt reproducibly from the repo."
+      ],
+      "show": [
+        "Both architecture diagrams"
+      ],
+      "call_out": "One governed core, with an optional AWS edge",
+      "transition": {
+        "next_tab": "",
+        "line": "Questions?"
+      }
+    }
+  ]
+}

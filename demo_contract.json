@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "repo": "aws-vietnam-textile-production",
+  "operation": "on-demand",
+  "data_classification": "synthetic demonstration only",
+  "grains": {
+    "RAW.PRODUCTION_LINES": "one row per garment production line (one line type at one city)",
+    "RAW.LINE_DAILY": "one row per line per day (90 days)",
+    "RAW.LINE_QUALIFICATION": "one row per line (backup machine qualification snapshot)",
+    "CURATED.PERFORMANCE_SUMMARY": "one row per line",
+    "CURATED.TREND_ANALYSIS": "one row per day",
+    "CURATED.CONSTRAINT_CAUSES": "one row per stoppage root cause",
+    "CURATED.KPI_SUMMARY": "one row per KPI",
+    "ML.CONSTRAINT_RISK_SCORES": "one row per line (latest day)"
+  },
+  "metrics": {
+    "Plan Attainment": "100 * SUM(UNITS_COMPLETED) / SUM(COMMITTED_UNITS), pieces completed over pieces committed",
+    "Line Stoppages": "SUM(CONSTRAINT_COUNT)",
+    "Queue Hours per Piece": "SUM(QUEUE_HOURS) / SUM(WIP_ARRIVALS), WIP queue hours per piece released to the line",
+    "WIP Released (pieces)": "SUM(WIP_ARRIVALS)",
+    "Line Availability": "100 * SUM(OPERATING_HOURS) / SUM(PLANNED_HOURS)",
+    "Lines Monitored": "COUNT(RAW.PRODUCTION_LINES)",
+    "Backup Machine Coverage": "100 * SUM(LEAST(QUALIFIED_STATIONS, REQUIRED_STATIONS)) / SUM(REQUIRED_STATIONS)"
+  },
+  "chart_bindings": {
+    "daily_plan_attainment": [
+      "CURATED.TREND_ANALYSIS.METRIC_DATE",
+      "PLAN_ATTAINMENT_PCT"
+    ],
+    "pm_vs_plan_attainment": [
+      "CURATED.PERFORMANCE_SUMMARY.PM_COMPLIANCE_PCT",
+      "PLAN_ATTAINMENT_PCT"
+    ],
+    "piece_shortfall_by_cause": [
+      "CURATED.CONSTRAINT_CAUSES.ROOT_CAUSE",
+      "UNITS_SHORTFALL"
+    ],
+    "quicksight_stoppage_risk": [
+      "ENTITY_ID",
+      "MAX(CONSTRAINT_PROB_7D)"
+    ]
+  },
+  "freshness": "MAX(EVENT_DATE) is an observation watermark; requestedAt is not freshness",
+  "required_capabilities": {
+    "core_pipeline": "Curated KPIs reconcile to a RAW recomputation (run_core.py checks this on every build)",
+    "stoppage_risk_model": "Snowflake ML CLASSIFICATION of P(line stoppage in next 7 days) per line, evaluated on an out-of-time holdout",
+    "forecast_and_anomaly": "14-day network-wide plan-attainment FORECAST; throughput gap ANOMALY_DETECTION (train 75 days, detect last 15)",
+    "search": "Cortex Search SEARCH.PRODUCTION_SOP_SEARCH over synthetic line stoppage SOPs (one per line type and cause)",
+    "semantic_analytics": "Semantic view APP.PRODUCTION_ANALYTICS and Cortex Agent APP.PRODUCTION_AGENT using analyst + search tools",
+    "grounded_ai": "Agent answers return generated SQL and SOP citations; the action memo uses only KPI, stoppage, cause and risk rows",
+    "quicksight": "DIRECT_QUERY dashboard (KPIs, daily plan attainment, stoppages by line, stoppage risk, IoT message count) through a read-only Snowflake service user",
+    "quicksight_q": "Amazon Q topic over the curated datasets for natural-language questions",
+    "aws_ingestion": "IoT Core rule -> S3 -> Snowpipe AUTO_INGEST into RAW.LIVE_TELEMETRY",
+    "notifications": "APP.LIVE_ALARM_ALERT logs new ALARM readings to APP.ALERT_LOG and emails via SYSTEM$SEND_EMAIL; alert and tasks suspended between demos",
+    "orchestration": "Task graph APP.TASK_REFRESH_CURATED -> APP.TASK_RESCORE_RISK run on demand (EXECUTE TASK)",
+    "app_deployment": "SPCS service APP.VN_TEXTILE_PRODUCTION_APP; routes /api/data, /api/ask, /api/agent"
+  },
+  "builds": {
+    "snowflake": {
+      "database": "VIETNAM_TEXTILE_PRODUCTION_SNOWFLAKE",
+      "app_setting": "DEMO_PLATFORM=snowflake",
+      "live_telemetry": "APP.SIMULATE_TELEMETRY(n)",
+      "memo": "Cortex AI_COMPLETE (claude-sonnet-4-5)"
+    },
+    "aws": {
+      "database": "VIETNAM_TEXTILE_PRODUCTION_AWS",
+      "app_setting": "DEMO_PLATFORM=aws",
+      "live_telemetry": "AWS IoT Core -> S3 -> Snowpipe",
+      "memo": "Amazon Bedrock Claude Sonnet 4.5 via APP.BEDROCK_GENERATE",
+      "capabilities": "see required_capabilities"
+    }
+  }
+}
